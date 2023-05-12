@@ -1,27 +1,40 @@
-import com.codeborne.selenide.Screenshots;
+import com.codeborne.selenide.SelenideElement;
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Configuration.reportsFolder;
 import static com.codeborne.selenide.Selectors.byClassName;
 import static com.codeborne.selenide.Selectors.byId;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RadioButtonTests extends ConfigTests {
+public class RadioButtonTests extends ConfigTests implements IRetryAnalyzer {
+    int retryNumber = 0;
+    int maxRetrys = 5;
+
+
+    @Override
+    public boolean retry(ITestResult iTestResult) {
+        if (iTestResult.getStatus() == ITestResult.FAILURE) {
+            if (retryNumber < maxRetrys) {
+                retryNumber++;
+                return true;
+            }
+        }
+        return false;
+    }
 
     @BeforeMethod
     public void specialSetup() {
-
         reportsFolder = "src/main/RadioButtonFailedTests";
-        baseUrl = "https://demoqa.com/radio-button";
     }
 
-    @Test(priority = 1)
+    @Test(priority = 2, groups = "FrondEnd", retryAnalyzer = RadioButtonTests.class)
     public void selectYes() {
-        open("");
-        actions().moveToElement($(byId("yesRadio"))).click().perform();
+        open("https://demoqa.com/radio-button");
+        SelenideElement yesButton = $(byId("yesRadio"));
+        actions().moveToElement(yesButton).click().perform();
 
         String actualText = $(byClassName("text-success")).getText();
         String expectedText = "Impressive";
@@ -30,11 +43,13 @@ public class RadioButtonTests extends ConfigTests {
         softAssert.assertAll();
     }
 
-    @Test(priority = 2)
+    @Test(priority = 1, groups = "BackEnd")
     public void checkNo() {
-        open("");
-        Boolean noButton = $(byId("noRadio")).isEnabled();
-        softAssert.assertTrue(noButton);
+        open("https://demoqa.com/radio-button");
+        SelenideElement noButton = $(byId("noRadio"));
+        softAssert.assertTrue(noButton.isEnabled());
         softAssert.assertAll();
     }
+
+
 }
