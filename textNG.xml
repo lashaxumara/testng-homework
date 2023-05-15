@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="testNGClasses" preserve-order="true" parallel="methods">
+    <test name="test1">
+        <groups>
+            <define name=".*End"/>
+        </groups>
+        <classes>
+            <class name="CheckboxTests"/>
+            <class name="RadioButtonTests"/>
+        </classes>
+    </test>
+</suite>
