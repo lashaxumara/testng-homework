@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="testNGParametrization">
+    <test name="test1">
+        <parameter name="firstName" value="Lasha"/>
+        <parameter name="lastName" value="Khumarashvili"/>
+        <parameter name="gender" value="Male"/>
+        <parameter name="mobileNumber" value="571888888"/>
+        <classes>
+            <class name="ParametrizationTest"/>
+        </classes>
+    </test>
+    <test name="test2">
+        <parameter name="firstName" value="Mariam"/>
+        <parameter name="lastName" value="Mirianashvili"/>
+        <parameter name="gender" value="Female"/>
+        <parameter name="mobileNumber" value="123456789"/>
+        <classes>
+            <class name="ParametrizationTest"/>
+        </classes>
+    </test>
+    <test name="test3">
+        <parameter name="firstName" value="Giorgi"/>
+        <parameter name="lastName" value="Giorganashvili"/>
+        <parameter name="gender" value="Male"/>
+        <parameter name="mobileNumber" value="987654321"/>
+        <classes>
+            <class name="ParametrizationTest"/>
+        </classes>
+    </test>
+</suite>

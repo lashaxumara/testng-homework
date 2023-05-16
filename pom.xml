@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide-testng</artifactId>
-            <version>6.9.0</version>
+            <version>6.12.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
